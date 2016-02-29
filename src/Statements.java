@@ -8,26 +8,17 @@ import java.util.ArrayList;
 public class Statements {
     ArrayList<Expression> expressions;
     ArrayList<Variable> vars;
-    private static Statements instance = null;
 
     //SINGLETON PATTERN
-    protected Statements() {
-        expressions = new ArrayList<Expression>();
-        vars = new ArrayList<Variable>();
-        instance = this;
+    public Statements() {
+        expressions = new ArrayList<>();
+        vars = new ArrayList<>();
     }
 
-    public static Statements getInstance() {
-        if (instance == null) instance = new Statements();
-        return instance;
-    }
 
 
     public void addExpression(Expression expr) {
         expressions.add(expr);
-    }
-    public ArrayList<Variable> getVars() {
-        return vars;
     }
 
     public Variable getVarForSymbol(String s) {
@@ -57,7 +48,7 @@ public class Statements {
     private boolean nextFalseToTrue(int i) {
         int j = i +1;
         while (j < vars.size()) {
-            if (vars.get(j).getVal() == false) {
+            if (!vars.get(j).getVal()) {
                 setTrue(j);
                 return true;
             } else {j++;}
@@ -75,12 +66,11 @@ public class Statements {
 
         int i = vars.size() -1;
         while (i >= 0) {
-            if (toSolve.getVal() == true) return true;
-            if (vars.get(i).getVal() == false) {
+            if (toSolve.getVal()) return true;
+            if (!vars.get(i).getVal()) {
                 setTrue(i);
             } else {
-                if (nextFalseToTrue(i)) {}
-                else {i--;}
+                if (!nextFalseToTrue(i)) {i--;}
             }
         }
 
