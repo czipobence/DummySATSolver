@@ -6,6 +6,12 @@
 #IntelliJ folder
 .idea/
 
+#out folder
+out/
+
+#iml file
+*.iml
+
 # Package Files #
 *.jar
 *.war
